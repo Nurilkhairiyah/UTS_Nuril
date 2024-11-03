@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Courses</title>
+</head>
+<body>
+    <h1>Courses List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Instructor</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% courses.forEach(course => { %>
+                <tr>
+                    <td><%= course.title %></td>
+                    <td><%= course.description %></td>
+                    <td><%= course.instructor_name %></td>
+                    <td>
+                        <a href="/courses/edit/<%= course.id %>">Edit</a>
+                        <a href="/courses/delete/<%= course.id %>">Delete</a>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <form action="/courses" method="POST">
+        <input type="text" name="title" placeholder="Course Title" required>
+        <textarea name="description" placeholder="Description"></textarea>
+        <select name="instructor_id" required>
+            <% instructors.forEach(instructor => { %>
+                <option value="<%= instructor.id %>"><%= instructor.name %></option>
+            <% }) %>
+        </select>
+        <button type="submit">Add Course</button>
+    </form>
+</body>
+</html>
